@@ -588,10 +588,7 @@ public class ExcelImportService {
 				}
 				if ([Date.class, LocalDate.class].any {it.isInstance(value)}) {
 					//dsq-OSM - not sure how to properly handle this date related stuff
-					def style = origcell.sheet.workbook.createCellStyle()
-					style.cloneStyleFrom(origcell.getCellStyle())
-					style.setDataFormat((short)0x0e)
-					origcell.setCellStyle(style)
+					origcell.getCellStyle().setDataFormat((short)0x0e)
 					origcell.setCellValue((value instanceof LocalDate)? value.toDateTimeAtStartOfDay().toDate(): value)
 					return
 				}
